@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskGalaxy - Task Manager with Progress Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1>TaskGalaxy</h1>
+        <p>Task Manager with Progress Tracker</p>
+    </header>
+
+    <main class="app-container">
+        <button id="openModalBtn" class="btn btn-primary add-task-btn">
+            <i class="fas fa-plus"></i> Add New Task
+        </button>
+
+        <section class="controls-section">
+            <input type="text" id="searchInput" placeholder="Search tasks by title or tag...">
+            <div class="filter-sort-group">
+                <div id="filters" class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                </div>
+                <div class="sort-buttons">
+                    <button id="sortPriority" class="btn btn-secondary"><i class="fas fa-exclamation-circle"></i> Priority</button>
+                    <button id="sortDue" class="btn btn-secondary"><i class="fas fa-calendar-alt"></i> Due Date</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="progress-section">
+            <div class="progress-bar-container">
+                <div id="progressBarFill" class="progress-fill"></div>
+            </div>
+            <div class="progress-footer">
+                <p id="progressText" class="progress-text">0/0 tasks completed</p>
+                <button id="clearCompletedBtn" class="btn btn-danger">Clear Completed</button>
+            </div>
+        </section>
+
+        <section class="tasks-section">
+            <ul id="tasksList" class="tasks-list">
+                </ul>
+        </section>
+    </main>
+
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle">Add New Task</h2>
+            <form id="taskForm" class="task-form">
+                <div class="form-group">
+                    <label for="modalTaskTitle">Task Title</label>
+                    <input type="text" id="modalTaskTitle" required placeholder="Enter task title">
+                </div>
+                <div class="form-group">
+                    <label for="modalTaskNotes">Notes</label>
+                    <textarea id="modalTaskNotes" placeholder="Add detailed notes or description..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="modalTaskTags">Tags (comma separated)</label>
+                    <input type="text" id="modalTaskTags" placeholder="e.g., work, urgent, project-x">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="modalTaskDue">Due Date</label>
+                        <input type="datetime-local" id="modalTaskDue">
+                    </div>
+                    <div class="form-group">
+                        <label for="modalTaskPriority">Priority</label>
+                        <select id="modalTaskPriority">
+                            <option value="High">High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" id="modalSubmitBtn" class="btn btn-primary">Save Task</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
